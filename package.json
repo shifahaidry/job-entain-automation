@@ -64,7 +64,8 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "e2e": "npx cypress open"
+    "e2e": "npx cypress open",
+    "chrome": "cypress run --headed --browser chrome"
   },
   "eslintConfig": {
     "extends": [
