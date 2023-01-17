@@ -1,4 +1,4 @@
-import { RACING_CATEGORIES } from "../config/constants";
+import { RACING_CATEGORIES,CATEGORY_ID_THOROUGHBRED,CATEGORY_ID_GREYHOUND,CATEGORY_ID_HARNESS } from "../config/constants";
 
 describe('Page Content', () => {
   it('Should correctly display page title', () => {
@@ -18,5 +18,27 @@ describe('Page Content', () => {
         });
       })
     });
+  })
+
+  it('Should have atleast one checkbox selected ', () => {
+    cy.visit('/');
+    // wait for spinner
+    cy.get('.loading-spinner').should('not.exist');
+    // uncheck other filter
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_THOROUGHBRED}"] > input`).should('be.visible').click()
+
+    cy.get('.loading-spinner').should('not.exist');
+    // uncheck other filter
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_GREYHOUND}"] > input`).should('be.visible').click()
+
+    cy.get('.loading-spinner').should('not.exist');
+    // uncheck other filter
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_HARNESS}"] > input`).should('be.visible').click()
+
+    // will check for all 3 types are checked
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_THOROUGHBRED}"] > input`).should('be.checked');
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_GREYHOUND}"] > input`).should('be.checked');
+    cy.get(`div[data-testid="category-filter-${CATEGORY_ID_HARNESS}"] > input`).should('be.checked');
+
   })
 });
